@@ -1,0 +1,12 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+
+
+  &-list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
