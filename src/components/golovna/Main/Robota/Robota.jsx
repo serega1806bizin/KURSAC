@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { motion } from "framer-motion";
 import "./Robota.scss"
-// eslint-disable-next-line react/prop-types
+ 
 export const Robota = ({ roboti }) => {
   return (
     <motion.div

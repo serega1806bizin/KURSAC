@@ -1,27 +1,52 @@
-import  { useState } from 'react';
+import { useState, useEffect } from "react";
 
-export const VARIANT_Q = () => {
+// eslint-disable-next-line react/prop-types
+export const VARIANT_Q = ({ onChange }) => {
   const [options, setOptions] = useState([
-    { id: 1, text: "" },
-    { id: 2, text: "" },
-    { id: 3, text: "" },
-    { id: 4, text: "" },
+    { id: 1, text: "", isCorrect: false },
+    { id: 2, text: "", isCorrect: false },
+    { id: 3, text: "", isCorrect: false },
+    { id: 4, text: "", isCorrect: false },
   ]);
 
+  // Передача данных наверх при изменении вариантов
+  useEffect(() => {
+    onChange({
+      answer: {
+        variants: options.map((option) => option.text), // Все варианты
+        correct: options.map((option) => option.isCorrect ? 1 : 0), // Правильные ответы (1 или 0)
+      },
+    });
+  }, [options]);
+
   const addOption = () => {
-    setOptions([...options, { id: options.length + 1, text: "" }]);
+    setOptions([...options, { id: options.length + 1, text: "", isCorrect: false }]);
   };
 
   const removeOption = (id) => {
-    const updatedOptions = options.filter(option => option.id !== id).map((option, index) => ({
-      ...option,
-      id: index + 1,
-    }));
+    const updatedOptions = options
+      .filter((option) => option.id !== id)
+      .map((option, index) => ({
+        ...option,
+        id: index + 1, // Обновляем id
+      }));
     setOptions(updatedOptions);
   };
 
   const updateOptionText = (id, newText) => {
-    setOptions(options.map(option => option.id === id ? { ...option, text: newText } : option));
+    setOptions(
+      options.map((option) =>
+        option.id === id ? { ...option, text: newText } : option
+      )
+    );
+  };
+
+  const toggleCorrect = (id) => {
+    setOptions(
+      options.map((option) =>
+        option.id === id ? { ...option, isCorrect: !option.isCorrect } : option
+      )
+    );
   };
 
   return (
@@ -30,9 +55,14 @@ export const VARIANT_Q = () => {
         Додайте варіанти відповіді:<span className="red">*</span>
       </label>
       <div className="answer-options">
-        {options.map(option => (
+        {options.map((option) => (
           <label key={option.id} className="answer-option">
-            <input type="checkbox" className="answer-checkbox" />
+            <input
+              type="checkbox"
+              className="answer-checkbox"
+              checked={option.isCorrect}
+              onChange={() => toggleCorrect(option.id)} // Обработка выбора правильного ответа
+            />
             <input
               type="text"
               className="answer-input"

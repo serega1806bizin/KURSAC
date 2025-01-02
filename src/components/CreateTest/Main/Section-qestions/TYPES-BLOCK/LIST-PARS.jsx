@@ -1,10 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export const LIST_PARS = () => {
+// eslint-disable-next-line react/prop-types
+export const LIST_PARS = ({ onChange }) => {
   const [pairs, setPairs] = useState([
     { id: 1, first: "1", second: "7" },
     { id: 2, first: "8", second: "4" },
   ]);
+
+  const [isOrderImportant, setIsOrderImportant] = useState(false);
+
+  // Передача данных наверх через onChange
+  useEffect(() => {
+    onChange({
+      answer: {
+        pairs: pairs.map((pair) => [Number(pair.first), Number(pair.second)]), // Массив пар чисел
+        consistencyImportant: isOrderImportant, // Важность порядка
+      },
+    });
+  }, [pairs, isOrderImportant]);
 
   const addPair = () => {
     setPairs([...pairs, { id: pairs.length + 1, first: "", second: "" }]);
@@ -22,8 +35,6 @@ export const LIST_PARS = () => {
       pairs.map((pair) => (pair.id === id ? { ...pair, [key]: value } : pair))
     );
   };
-
-  const [isOrderImportant, setIsOrderImportant] = useState(false);
 
   return (
     <div className="pair-container">

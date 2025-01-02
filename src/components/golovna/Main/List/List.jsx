@@ -2,7 +2,7 @@
 import { Robota } from '../Robota/Robota'
 import './List.scss'
 
-// eslint-disable-next-line react/prop-types
+ 
 export const MainList = ({ roboti }) => {
   return (
     <div className="main-list">

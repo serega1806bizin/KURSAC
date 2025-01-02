@@ -1,4 +1,5 @@
-export const Section1 = () => {
+// eslint-disable-next-line react/prop-types
+export const Section1 = ({ setTestName, setTestNumber, setAdditionalText }) => {
   return (
     <section className="section-1">
       <form action="" className="section-1-form">
@@ -13,6 +14,7 @@ export const Section1 = () => {
             name="name"
             className="form-input"
             placeholder="Пошук найкоротших шляхів у графі"
+            onChange={(e) => setTestName(e.target.value)} // Привязка обновления состояния
           />
         </div>
         <div className="form-container">
@@ -26,6 +28,7 @@ export const Section1 = () => {
             name="number"
             className="form-input"
             placeholder="Номер роботи"
+            onChange={(e) => setTestNumber(Number(e.target.value))} // Привязка обновления состояния
           />
         </div>
         <div className="form-container">
@@ -37,6 +40,7 @@ export const Section1 = () => {
             name="aditional"
             className="form-area form-input"
             placeholder="В цій роботі вам слід..."
+            onChange={(e) => setAdditionalText(e.target.value)} // Привязка обновления состояния
           ></textarea>
         </div>
       </form>

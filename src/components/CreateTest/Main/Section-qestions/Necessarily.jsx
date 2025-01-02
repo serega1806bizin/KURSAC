@@ -1,7 +1,5 @@
-import { FileUpload } from "./FileUpload";
-
 // eslint-disable-next-line react/prop-types
-export const Necessarily = ({ onTypeChange }) => {
+export const Necessarily = ({ onTypeChange, onPointsChange }) => {
   return (
     <>
       <div className="form-container">
@@ -10,13 +8,14 @@ export const Necessarily = ({ onTypeChange }) => {
         </label>
         <select
           placeholder="Оберіть тип завдання"
+          defaultValue={""}
           required
           id="type-qestion"
           name="type-qestion"
           className="form-input"
           onChange={(e) => onTypeChange(e.target.value)} // Отслеживание изменений
         >
-          <option value="">-- Виберіть --</option>
+          <option value="" disabled>-- Виберіть --</option>
           <option value="text-answer">Текстова відповідь</option>
           <option value="number-answer">Едине число</option>
           <option value="number-list">Список чисел</option>
@@ -37,6 +36,8 @@ export const Necessarily = ({ onTypeChange }) => {
           name="marka"
           className="form-input"
           placeholder="Кількість балів"
+          defaultValue={0}
+          onChange={(e) => onPointsChange(Number(e.target.value))} // Отслеживаем изменения
         />
       </div>
       <div className="form-container">
@@ -52,7 +53,6 @@ export const Necessarily = ({ onTypeChange }) => {
           placeholder="Для даного зваженого неорієнтованого..."
         />
       </div>
-      <FileUpload />
     </>
   );
 };

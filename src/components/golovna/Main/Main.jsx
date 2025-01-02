@@ -1,9 +1,9 @@
-/* eslint-disable react/prop-types */
+ 
 import { useState } from "react"; 
 import { MainList } from "./List/List";
 import ch from "classnames";
 import "./Main.scss";
-import roboti from "./roboti.json";
+import roboti from "../../../../server/TESTS.json";
 
 const SORT_FIELD_NUMBER = 'number';
 const SORT_FIELD_NAME = 'name';

@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export const LIST_REBR_Q = () => {
+// eslint-disable-next-line react/prop-types
+export const LIST_REBR_Q = ({ onChange }) => {
   const [nodes, setNodes] = useState([
     { id: 1, x1: "1", x2: "1" },
     { id: 2, x1: "1", x2: "2" },
   ]);
+
+  // Передача данных наверх через onChange
+  useEffect(() => {
+    onChange({
+      answer: nodes.map((node) => [Number(node.x1), Number(node.x2)]), // Преобразование в массив пар чисел
+    });
+  }, [nodes]);
 
   const addNode = () => {
     setNodes([...nodes, { id: nodes.length + 1, x1: "", x2: "" }]);
@@ -24,53 +32,53 @@ export const LIST_REBR_Q = () => {
   };
 
   return (
-      <div className="node-container">
-        <label className="node-label">
-          Додайте очікувані вузол в список ребер:
-        </label>
+    <div className="node-container">
+      <label className="node-label">
+        Додайте очікувані вузол в список ребер:
+      </label>
 
-        <div className="node-list">
-          {nodes.map((node) => (
-            <div key={node.id} className="node-item">
-              <span className="node-title">Вузол №{node.id}</span>
-              <div className="node-content">
-                <span className="node-symbol">
-                  U<sub>{node.id} </sub>| (X
-                </span>
-                <sub>
-                  <input
-                    type="text"
-                    className="node-input"
-                    placeholder="1"
-                    value={node.x1}
-                    onChange={(e) => updateNode(node.id, "x1", e.target.value)}
-                  />
-                </sub>
-                <span className="node-symbol">,X</span>
-                <sub>
-                  <input
-                    type="text"
-                    className="node-input"
-                    placeholder="1"
-                    value={node.x2}
-                    onChange={(e) => updateNode(node.id, "x2", e.target.value)}
-                  />
-                </sub>
-                <span className="node-symbol">)</span>
-                <button
-                  className="node-delete-btn"
-                  onClick={() => removeNode(node.id)}
-                >
-                  ❌
-                </button>
-              </div>
+      <div className="node-list">
+        {nodes.map((node) => (
+          <div key={node.id} className="node-item">
+            <span className="node-title">Вузол №{node.id}</span>
+            <div className="node-content">
+              <span className="node-symbol">
+                U<sub>{node.id} </sub>| (X
+              </span>
+              <sub>
+                <input
+                  type="text"
+                  className="node-input"
+                  placeholder="1"
+                  value={node.x1}
+                  onChange={(e) => updateNode(node.id, "x1", e.target.value)}
+                />
+              </sub>
+              <span className="node-symbol">,X</span>
+              <sub>
+                <input
+                  type="text"
+                  className="node-input"
+                  placeholder="1"
+                  value={node.x2}
+                  onChange={(e) => updateNode(node.id, "x2", e.target.value)}
+                />
+              </sub>
+              <span className="node-symbol">)</span>
+              <button
+                className="node-delete-btn"
+                onClick={() => removeNode(node.id)}
+              >
+                ❌
+              </button>
             </div>
-          ))}
-        </div>
-
-        <button className="add-node-btn" onClick={addNode}>
-          Додати вузол
-        </button>
+          </div>
+        ))}
       </div>
+
+      <button className="add-node-btn" onClick={addNode}>
+        Додати вузол
+      </button>
+    </div>
   );
 };
