@@ -1,5 +1,5 @@
 // eslint-disable-next-line react/prop-types
-export const Necessarily = ({ onTypeChange, onPointsChange }) => {
+export const Necessarily = ({ onTypeChange, onPointsChange, onTextChange }) => {
   return (
     <>
       <div className="form-container">
@@ -51,6 +51,7 @@ export const Necessarily = ({ onTypeChange, onPointsChange }) => {
           name="title-task"
           className="form-input"
           placeholder="Для даного зваженого неорієнтованого..."
+          onChange={(e) => onTextChange(e.target.value)}
         />
       </div>
     </>

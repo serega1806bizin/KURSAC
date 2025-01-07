@@ -5,11 +5,31 @@ import cors from 'cors';
 
 const app = express();
 const PORT = 3001;
-const TESTS_FILE = './TESTS.json';
+const TESTS_FILE = '../TESTS.json';
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+
+app.post('/submit', (req, res) => {
+  const answerData = req.body;
+
+  fs.readFile('answers.json', 'utf8', (err, data) => {
+    // Если файл отсутствует, создаём новый массив для ответов
+    const answers = err && err.code === 'ENOENT' ? [] : JSON.parse(data || '[]');
+
+    answers.push(answerData);
+
+    fs.writeFile('answers.json', JSON.stringify(answers, null, 2), (writeErr) => {
+      if (writeErr) {
+        console.error('Ошибка записи в файл:', writeErr);
+        return res.status(500).send('Ошибка записи в файл');
+      }
+      res.status(200).json({ message: 'Данные успешно сохранены!' });
+    });
+  });
+});
+
 
 // Эндпоинт для сохранения тестов
 app.post('/save-test', (req, res) => {
@@ -59,6 +79,29 @@ app.post('/save-test', (req, res) => {
   });
 });
 
+// Эндпоинт для получения теста по ID
+app.get('/tests/:testId', (req, res) => {
+  const testId = parseInt(req.params.testId, 10); // Преобразуем ID в число
+
+  fs.readFile(TESTS_FILE, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Ошибка чтения файла:', err);
+      return res.status(500).send('Ошибка чтения файла');
+    }
+
+    const tests = JSON.parse(data || '[]'); // Парсим JSON (пустой массив, если файла нет)
+    const test = tests.find((t) => t.nomer === testId); // Ищем тест по ID
+
+    if (!test) {
+      return res.status(404).send('Тест не найден'); // Если тест не найден
+    }
+
+    res.status(200).json(test); // Возвращаем найденный тест
+  });
+});
+
+
+// Запуск сервера
 app.listen(PORT, () => {
   console.log(`Сервер запущен на http://localhost:${PORT}`);
 });

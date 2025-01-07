@@ -1,0 +1,234 @@
+[
+  {
+    "nomer": 1736250794379,
+    "student": "756765",
+    "group": "ненге",
+    "studentNumber": "65",
+    "dueTime": "2025-01-07T17:19:24.938Z",
+    "answers": [
+      {
+        "question-id": "0",
+        "answer": "енг"
+      },
+      {
+        "question-id": "1",
+        "answer": 567
+      },
+      {
+        "question-id": "2",
+        "answer": [
+          1,
+          2,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "question-id": "3",
+        "answer": [
+          [
+            6,
+            5
+          ],
+          [
+            78,
+            6
+          ]
+        ]
+      },
+      {
+        "question-id": "4",
+        "answer": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "question-id": "5",
+        "answer": [
+          {
+            "id": 1,
+            "first": "1",
+            "second": "7"
+          },
+          {
+            "id": 2,
+            "first": "8",
+            "second": "4"
+          }
+        ]
+      },
+      {
+        "question-id": "6",
+        "answer": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "nomer": 1736250794379,
+    "student": "756765",
+    "group": "ненге",
+    "studentNumber": "65",
+    "dueTime": "2025-01-07T17:28:16.177Z",
+    "answers": [
+      {
+        "question-id": "0",
+        "answer": "енг"
+      },
+      {
+        "question-id": "1",
+        "answer": 567
+      },
+      {
+        "question-id": "2",
+        "answer": [
+          1,
+          2,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "question-id": "3",
+        "answer": [
+          [
+            6,
+            5
+          ],
+          [
+            78,
+            6
+          ]
+        ]
+      },
+      {
+        "question-id": "4",
+        "answer": [
+          0,
+          0,
+          1,
+          1
+        ]
+      },
+      {
+        "question-id": "5",
+        "answer": [
+          {
+            "id": 1,
+            "first": "1",
+            "second": "7"
+          },
+          {
+            "id": 2,
+            "first": "8",
+            "second": "4"
+          }
+        ]
+      },
+      {
+        "question-id": "6",
+        "answer": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "nomer": 1736250794379,
+    "student": "756765",
+    "group": "ненге",
+    "studentNumber": "65",
+    "dueTime": "2025-01-07T17:30:17.377Z",
+    "answers": [
+      {
+        "question-id": "0",
+        "answer": "енг"
+      },
+      {
+        "question-id": "1",
+        "answer": 567
+      },
+      {
+        "question-id": "2",
+        "answer": [
+          1,
+          2,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "question-id": "3",
+        "answer": [
+          [
+            6,
+            5
+          ],
+          [
+            78,
+            6
+          ]
+        ]
+      },
+      {
+        "question-id": "4",
+        "answer": [
+          0,
+          0,
+          1,
+          1
+        ]
+      },
+      {
+        "question-id": "5",
+        "answer": [
+          [
+            1,
+            7
+          ],
+          [
+            8,
+            4
+          ]
+        ]
+      },
+      {
+        "question-id": "6",
+        "answer": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      }
+    ]
+  }
+]

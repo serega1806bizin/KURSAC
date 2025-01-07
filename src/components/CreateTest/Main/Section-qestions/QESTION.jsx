@@ -19,6 +19,7 @@ export const QESTION = ({ id, onDelete, onPointsChange, onUpdate }) => {
       onUpdate(id, {
         type: selectedType,
         points: additionalData.points || 0,
+        text: additionalData.text || "",
         answer: additionalData.answer || null, // Добавляем поле "answer"
         ...additionalData,
       });
@@ -80,6 +81,9 @@ export const QESTION = ({ id, onDelete, onPointsChange, onUpdate }) => {
         onTypeChange={(value) => setSelectedType(value)}
         onPointsChange={(points) =>
           setAdditionalData((prev) => ({ ...prev, points }))
+        }
+        onTextChange={(text) =>
+          setAdditionalData((prev) => ({ ...prev, text }))
         }
       />
       {renderComponent()}
