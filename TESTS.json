@@ -1,66 +1,39 @@
 [
   {
-    "nazwa": "Математика",
+    "nazwa": "Тест з математики",
     "nomer": 1,
-    "id": 1737060984858,
-    "link": "http://localhost:5173/test/1737060984858",
-    "totalPoints": 2,
-    "progress": 3,
-    "additional": "Можно списывать",
+    "id": 1737064681736,
+    "link": "http://localhost:5173/test/1737064681736",
+    "totalPoints": 5,
+    "progress": 1,
+    "additional": "Не списувати",
     "questions": [
       {
         "id": 0,
         "points": 2,
         "type": "number-answer",
-        "text": "Сколько 2+2",
+        "text": "2+2=",
         "answer": 4
-      }
-    ]
-  },
-  {
-    "nazwa": "Укр мова",
-    "nomer": 2,
-    "id": 1737061075178,
-    "link": "http://localhost:5173/test/1737061075178",
-    "totalPoints": 2,
-    "progress": 2,
-    "additional": "Списывать",
-    "questions": [
+      },
       {
-        "id": 0,
-        "points": 2,
-        "type": "text-answer",
-        "text": "Фонетика - про що?",
-        "answer": null
-      }
-    ]
-  },
-  {
-    "nazwa": "Физика",
-    "nomer": 11,
-    "id": 1737061934346,
-    "link": "http://localhost:5173/test/1737061934346",
-    "totalPoints": 5,
-    "progress": 2,
-    "additional": "2+2=5",
-    "questions": [
-      {
-        "id": 0,
-        "points": 5,
+        "id": 1,
+        "points": 3,
         "type": "number-list",
-        "text": "",
+        "text": "порахуйте від 1 - 10",
         "answer": {
           "massiv": [
             1,
             2,
-            9,
-            8,
-            6,
-            6,
+            3,
             4,
-            5
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
           ],
-          "consistencyImportant": false
+          "consistencyImportant": true
         }
       }
     ]

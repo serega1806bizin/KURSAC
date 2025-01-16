@@ -92,7 +92,11 @@ export const TestItem = () => {
   return (
     <div className="test-item">
       <header className="header-test-item">
-        <button className='goHome' onClick={handleBackButtonClick}>НАЗАД</button>
+        <div className="buttons">
+          <button type='button' className='goHome' onClick={handleBackButtonClick}>НАЗАД</button>
+          <button type='button' className='goEdit' >РЕДАГУВАТИ</button>
+          <button type='button' className='goDelete'>ВИДАЛИТИ</button>
+        </div>
         <p>Номер роботи: {test.nomer}</p>
         <p>Назва роботи: {test.nazwa}</p>
         <p>Кількість робіт: {test.progress}</p>

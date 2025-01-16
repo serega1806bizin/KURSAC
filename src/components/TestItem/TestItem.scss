@@ -19,6 +19,8 @@ html {
   font-size: 3.6rem;
 }
 
+
+
 .header-test-item {
   background-color: #fff;
   top: 0;
@@ -30,16 +32,55 @@ html {
   gap: 20px;
 }
 
-.goHome{
-  height: 100px;
-  font-size: inherit;
-  transition: background-color 0.5s ease-in-out;
+.buttons {
+  gap: 20px;
+  display: flex;
+  flex-direction: row;
+  width: 100%; 
+  justify-content: space-between; /* Distribute buttons evenly */
 }
 
-.goHome:hover{
-  background-color: #7fff00;
+.goHome {
+  height: 100px;
+  font-size: inherit;
+  flex: 1; /* Buttons take equal space */
+  transition: background-color 0.5s ease-in-out;
+  text-align: center; /* Center text in the button */
+}
+
+.goEdit {
+  height: 100px;
+  font-size: inherit;
+  flex: 1; /* Buttons take equal space */
+  transition: background-color 0.5s ease-in-out;
+  text-align: center; /* Center text in the button */
+}
+
+.goDelete {
+  height: 100px;
+  font-size: inherit;
+  flex: 1; /* Buttons take equal space */
+  transition: background-color 0.5s ease-in-out;
+  text-align: center; /* Center text in the button */
+}
+
+
+.goHome:hover {
+  background-color: green;
   cursor: pointer;
 }
+
+.goEdit:hover{
+  background-color: yellow;
+  cursor: pointer;
+}
+
+.goDelete:hover{
+  background-color: red;
+  cursor: pointer;
+}
+
+
 
 .main{
   display: flex;
