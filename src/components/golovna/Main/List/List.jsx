@@ -7,7 +7,7 @@ export const MainList = ({ roboti }) => {
   return (
     <div className="main-list">
       {roboti.map((roboti) => (
-        <Robota roboti={roboti} key={roboti.nomer}/>
+        <Robota roboti={roboti} key={roboti.id}/>
       ))}
     </div>
   )
