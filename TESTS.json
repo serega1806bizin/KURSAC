@@ -1,0 +1,20 @@
+[
+  {
+    "nazwa": "Математика",
+    "nomer": 4,
+    "id": 1737022664757,
+    "link": "http://localhost:5173/test/1737022664757",
+    "totalPoints": 2,
+    "progress": 2,
+    "additional": "Бла бла",
+    "questions": [
+      {
+        "id": 0,
+        "points": 2,
+        "type": "number-answer",
+        "text": "2+2=",
+        "answer": 4
+      }
+    ]
+  }
+]

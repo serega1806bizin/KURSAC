@@ -211,3 +211,19 @@ html {
     margin-top: 40px;
   }
 }
+
+.submit{
+  margin: 30px auto 0;
+  display: block;
+  width: 90%;
+  height: 60px;
+  font-size: inherit;
+  cursor: pointer;
+  transition: border-radius 0.5s ease, transform 0.5s ease;
+  &:hover{
+    transform: scale(1.1);
+    background: red;
+    color: #fff;
+    border-radius: 20px;
+    }
+}

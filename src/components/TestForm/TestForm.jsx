@@ -54,26 +54,29 @@ export const TestForm = () => {
   // Отправка данных
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
+    // Проверяем, что все ответы заполнены
     if (Object.keys(formData.answers).length !== test.questions.length) {
       alert("Пожалуйста, ответьте на все вопросы.");
       return;
     }
-
+  
     const submissionData = {
-      nomer: test.nomer,
-      student: formData.studentName,
-      group: formData.group,
-      studentNumber: formData.studentNumber,
-      dueTime: new Date().toISOString(),
+      "id-test": test.id, // ID теста
+      "id-answer": Date.now(), // Уникальный ID ответа
+      student: formData.studentName, // Имя студента
+      group: formData.group, // Группа студента
+      studentNumber: formData.studentNumber, // Номер в журнале
+      dueTime: new Date().toISOString(), // Время отправки
       answers: Object.entries(formData.answers).map(([questionId, answer]) => ({
         "question-id": questionId,
         answer,
       })),
     };
-
-    setIsSubmitting(true);
-
+  
+    setIsSubmitting(true); // Показываем индикатор загрузки
+  
+    // Отправляем запрос на сервер
     fetch("http://localhost:3001/submit", {
       method: "POST",
       headers: {
@@ -88,16 +91,20 @@ export const TestForm = () => {
         return response.json();
       })
       .then((data) => {
-        setIsSubmitting(false);
-        console.log("Ответ успешно отправлен:", data);
+        console.log("Прогресс обновлён и данные сохранены:", data);
         alert("Ответ успешно отправлен!");
+        window.close();
+        // Дополнительно: Обновить состояние или перейти на другую страницу
       })
       .catch((error) => {
         console.error("Ошибка отправки:", error);
-        setIsSubmitting(false);
         alert("Произошла ошибка при отправке!");
+      })
+      .finally(() => {
+        setIsSubmitting(false); // Скрываем индикатор загрузки
       });
   };
+  
 
   if (loading) {
     return <p>Загрузка теста...</p>;

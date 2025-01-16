@@ -5,7 +5,7 @@ import cors from 'cors';
 
 const app = express();
 const PORT = 3001;
-const TESTS_FILE = '../TESTS.json';
+const TESTS_FILE = 'TESTS.json';
 
 // Middleware
 app.use(cors());
@@ -14,21 +14,51 @@ app.use(bodyParser.json());
 app.post('/submit', (req, res) => {
   const answerData = req.body;
 
+  // Сохранение ответа в answers.json
   fs.readFile('answers.json', 'utf8', (err, data) => {
-    // Если файл отсутствует, создаём новый массив для ответов
     const answers = err && err.code === 'ENOENT' ? [] : JSON.parse(data || '[]');
-
     answers.push(answerData);
 
     fs.writeFile('answers.json', JSON.stringify(answers, null, 2), (writeErr) => {
       if (writeErr) {
-        console.error('Ошибка записи в файл:', writeErr);
-        return res.status(500).send('Ошибка записи в файл');
+        console.error('Ошибка записи в файл ответов:', writeErr);
+        return res.status(500).send('Ошибка записи в файл ответов');
       }
-      res.status(200).json({ message: 'Данные успешно сохранены!' });
+    });
+  });
+
+  // Обновление прогресса в TESTS.json
+  fs.readFile(TESTS_FILE, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Ошибка чтения файла тестов:', err);
+      return res.status(500).send('Ошибка чтения файла тестов');
+    }
+
+    const tests = JSON.parse(data || '[]');
+    const testIndex = tests.findIndex((t) => t.id === answerData['id-test']); // Найти тест по ID
+
+    if (testIndex === -1) {
+      return res.status(404).send('Тест не найден');
+    }
+
+    // Увеличение значения progress
+    tests[testIndex].progress = (tests[testIndex].progress || 0) + 1;
+
+    // Запись изменений обратно в файл
+    fs.writeFile(TESTS_FILE, JSON.stringify(tests, null, 2), (writeErr) => {
+      if (writeErr) {
+        console.error('Ошибка записи в файл тестов:', writeErr);
+        return res.status(500).send('Ошибка записи в файл тестов');
+      }
+
+      res.status(200).json({
+        message: 'Прогресс обновлён и данные успешно сохранены!',
+        updatedTest: tests[testIndex],
+      });
     });
   });
 });
+
 
 
 // Эндпоинт для сохранения тестов
@@ -36,7 +66,7 @@ app.post('/save-test', (req, res) => {
   const newTest = req.body;
 
   // Проверка структуры теста
-  if (!newTest.nazwa || !newTest.nomer || !newTest.questions || !Array.isArray(newTest.questions)) {
+  if (!newTest.id || !newTest.nazwa || !newTest.questions || !Array.isArray(newTest.questions)) {
     return res.status(400).send('Некорректные данные теста');
   }
 
@@ -50,7 +80,7 @@ app.post('/save-test', (req, res) => {
         }
         return res.status(200).json({
           message: 'Тест успешно сохранён!',
-          testId: newTest.nomer,
+          testId: newTest.id,
           totalQuestions: newTest.questions.length,
         });
       });
@@ -72,12 +102,13 @@ app.post('/save-test', (req, res) => {
       }
       res.status(200).json({
         message: 'Тест успешно сохранён!',
-        testId: newTest.nomer,
+        testId: newTest.id,
         totalQuestions: newTest.questions.length,
       });
     });
   });
 });
+
 
 // Эндпоинт для получения теста по ID
 app.get('/tests/:testId', (req, res) => {
@@ -90,7 +121,7 @@ app.get('/tests/:testId', (req, res) => {
     }
 
     const tests = JSON.parse(data || '[]'); // Парсим JSON (пустой массив, если файла нет)
-    const test = tests.find((t) => t.nomer === testId); // Ищем тест по ID
+    const test = tests.find((t) => t.id === testId); // Ищем тест по ID
 
     if (!test) {
       return res.status(404).send('Тест не найден'); // Если тест не найден

@@ -1,6 +1,7 @@
 .footer{
-  position: sticky;
-  bottom: 10px;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
   z-index: 1000;
   display: flex;
   justify-content: end;
