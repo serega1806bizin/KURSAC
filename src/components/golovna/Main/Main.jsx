@@ -1,13 +1,13 @@
  
 import { useState } from "react"; 
-import { MainList } from "./List/List";
 import ch from "classnames";
 import "./Main.scss";
 import roboti from "../../../../TESTS.json";
+import { Robota } from "./Robota/Robota";
 
-const SORT_FIELD_NUMBER = 'number';
-const SORT_FIELD_NAME = 'name';
-const SORT_FIELD_PROGRESS = 'progress';
+const SORT_FIELD_NUMBER = "nomer";
+const SORT_FIELD_NAME = "nazwa";
+const SORT_FIELD_PROGRESS = "progress";
 
 export const Main = () => {
   const [visibleRobots, setVisibleRobots] = useState(roboti);
@@ -24,10 +24,8 @@ export const Main = () => {
     if (sortField === SORT_FIELD_NUMBER) {
       reset(); 
     } else {
-      setVisibleRobots(
-        [...visibleRobots].sort((a, b) => a.nomer - b.nomer)
-      );
-      setSortField(SORT_FIELD_NUMBER); 
+      setVisibleRobots([...visibleRobots].sort((a, b) => a.nomer - b.nomer));
+      setSortField(SORT_FIELD_NUMBER);
     }
   };
 
@@ -81,7 +79,11 @@ export const Main = () => {
         />
         <button onClick={reset} className="main-header-button">Скинути</button>
       </div>
-      <MainList roboti={visibleRobots} />
+      <div className="main-list">
+      {visibleRobots.map((roboti) => (
+        <Robota roboti={roboti} key={roboti.id} />
+      ))}
+    </div>
     </main>
   );
 };

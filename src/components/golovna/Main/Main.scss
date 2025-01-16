@@ -2,7 +2,12 @@
   display: flex;
   flex-direction: column;
   gap: 22px;
-
+  
+  &-list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
   &-header {
     display: flex;
     gap: 10px;

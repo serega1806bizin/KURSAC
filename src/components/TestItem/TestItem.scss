@@ -19,7 +19,7 @@ html {
   font-size: 3.6rem;
 }
 
-.header {
+.header-test-item {
   background-color: #fff;
   top: 0;
   z-index: 1000;
@@ -53,7 +53,7 @@ html {
   gap: 10px;
 }
 
-.main-header{
+.main-header-test-item{
   position: sticky;
   top: 0;
   display: flex;
@@ -61,6 +61,7 @@ html {
   justify-content: center;
   z-index: 1000;
   background-color: #fff;
+  margin-bottom: 20px;
 }
 
 .main-header-button{
@@ -110,47 +111,53 @@ html {
 
 }
 
-.main-block{
-  display: flex;
+.main-block {
+  display: grid; /* Включаем CSS Grid */
+  grid-template-columns: 80px 1fr auto auto; /* Определяем структуру колонок */
+  grid-column-gap: 20px; /* Расстояние между колонками */
+  align-items: center; /* Выравнивание по вертикали */
   border: #000 solid;
   border-radius: 0;
   background-color: #FFF;
   height: 85px;
-  padding: 8px 20px;
-  align-items: center;
+  padding: 1px 20px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.main-block:hover{
+.main-block:hover {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   cursor: pointer;
 }
 
-.main-block-number{
+.main-block-number {
   border-radius: 10000px;
   border: #000 solid;
-  justify-content: center;
   display: flex;
+  justify-content: center;
+  align-items: center;
   height: 70px;
   width: 70px;
-  align-items: center;
   text-align: center;
   background-color: #fff;
-  margin-right: 20px;
 }
 
-.main-block-title{
+.main-block-title {
   color: #000;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.main-block-progress{
-  margin-left: auto;
+.main-block-group {
+  justify-self: end; /* Прижимаем к правому краю */
   white-space: nowrap;
-  margin-right: 20px;
 }
+
+.main-block-progress {
+  justify-self: end; /* Прижимаем к правому краю */
+  white-space: nowrap;
+}
+
 
 .main-block-progress-value{
   border-radius: 100px;
