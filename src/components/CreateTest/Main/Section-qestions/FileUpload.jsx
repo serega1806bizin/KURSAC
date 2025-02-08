@@ -1,6 +1,6 @@
 import  { useState } from 'react';
 
-export const FileUpload = () => {
+export const UploadFile = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
 
   const handleFileChange = (event) => {

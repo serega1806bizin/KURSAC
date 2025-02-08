@@ -87,6 +87,7 @@ export const QESTION = ({ id, onDelete, onPointsChange, onUpdate }) => {
         }
       />
       {renderComponent()}
+      
       <button className="delete-button" onClick={onDelete}>
         ВИДАЛИТИ ЗАВДАННЯ
       </button>
