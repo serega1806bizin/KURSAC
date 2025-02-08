@@ -1,3 +1,5 @@
+import { UploadFile } from "./FileUpload";
+
 // eslint-disable-next-line react/prop-types
 export const Necessarily = ({ onTypeChange, onPointsChange, onTextChange }) => {
   return (
