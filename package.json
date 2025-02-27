@@ -10,7 +10,10 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
+  "homepage": "https://github.com/serega1806bizin/discretka",
+
   "dependencies": {
+    "axios": "^1.7.9",
     "classnames": "^2.5.1",
     "cors": "^2.8.5",
     "express": "^4.21.2",
@@ -29,6 +32,7 @@
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
+    "gh-pages": "^6.3.0",
     "globals": "^15.14.0",
     "sass": "^1.83.0",
     "vite": "^6.0.5"

@@ -1,19 +1,69 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './TestItem.scss';
-import atveti from "../../../answers.json";
-import roboti from "../../../TESTS.json";
 import ch from "classnames";
+import { BAZISSILIK } from '../../../var';
 
 const SORT_FIELD_NUMBER = "studentNumber";
 const SORT_FIELD_GROUP = "group";
 
 export const TestItem = () => {
   const { id } = useParams();
-  const test = roboti.find((test) => test.id === Number(id));
+  const navigate = useNavigate();
+
+  const [roboti, setRoboti] = useState([]);
+  const [test, setTest] = useState(null);
   const [visibleAnswers, setVisibleAnswers] = useState([]);
   const [sortField, setSortField] = useState('');
   const [query, setQuery] = useState('');
+
+  useEffect(() => {
+    fetch(BAZISSILIK.api+"api/tests")
+      .then((res) => res.json())
+      .then((data) => {
+        setRoboti(data);  
+      })
+      .catch((error) => console.error("Ошибка загрузки тестов:", error));
+  }, []);
+
+  useEffect(() => {
+    if (roboti.length > 0) {
+      const foundTest = roboti.find((test) => test.id === Number(id));
+      setTest(foundTest || null);
+    }
+  }, [roboti, id]); // Теперь test обновится, когда загрузятся roboti
+
+
+  useEffect(() => {
+    if (test) {
+      fetch(BAZISSILIK.api + "api/answers")
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Полученные ответы:", data);
+          const relatedAnswers = data.filter((answer) => Number(answer["id-test"]) === test.id);
+          setVisibleAnswers(relatedAnswers);
+        })
+        .catch((error) => console.error("Ошибка загрузки ответов:", error));
+    }
+  }, [test]);
+  
+  const handleDeleteTest = () => {
+    if (!test) return;
+    if (window.confirm("Ви дійсно хочете видалити цей тест?")) {
+      fetch(BAZISSILIK.api+"api/tests/"+test.id, { method: "DELETE" })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) {
+            alert("Помилка: " + data.error);
+          } else {
+            alert("Тест успішно видалено!");
+            navigate("/");
+          }
+        })
+        .catch((error) => console.error("Помилка при видаленні:", error));
+    }
+  };
+  
 
   // Функция для сортировки
   const sortAnswers = (answers, field) => {
@@ -29,11 +79,15 @@ export const TestItem = () => {
   // Сброс фильтра и сортировки
   const reset = () => {
     if (test) {
-      const relatedAnswers = atveti.filter((answer) => answer["id-test"] === test.id);
-      setVisibleAnswers(relatedAnswers);
+      fetch(BAZISSILIK.api + "api/answers")
+        .then((res) => res.json())
+        .then((data) => {
+          const relatedAnswers = data.filter((answer) => Number(answer["id-test"]) === test.id);
+          setVisibleAnswers(relatedAnswers);
+        });
     }
-    setSortField('');
-    setQuery('');
+    setSortField("");
+    setQuery("");
   };
 
   // Сортировка по номеру студента
@@ -42,9 +96,10 @@ export const TestItem = () => {
       reset();
     } else {
       setSortField(SORT_FIELD_NUMBER);
-      setVisibleAnswers(sortAnswers(visibleAnswers, SORT_FIELD_NUMBER));
+      setVisibleAnswers(sortAnswers([...visibleAnswers], SORT_FIELD_NUMBER));
     }
   };
+  
 
   // Сортировка по группе
   const sortByGroup = () => {
@@ -61,33 +116,27 @@ export const TestItem = () => {
     const newQuery = e.target.value;
     setQuery(newQuery);
 
-    const filteredAnswers = atveti.filter(
-      (answer) =>
-        answer.student.toLowerCase().includes(newQuery.toLowerCase()) &&
-        answer["id-test"] === test.id
-    );
-
-    setVisibleAnswers(sortAnswers(filteredAnswers, sortField));
+    fetch(BAZISSILIK.api + "api/answers")
+      .then((res) => res.json())
+      .then((data) => {
+        const filteredAnswers = data.filter(
+          (answer) =>
+            answer.student.toLowerCase().includes(newQuery.toLowerCase()) &&
+            Number(answer["id-test"]) === test.id
+        );
+        setVisibleAnswers(sortAnswers(filteredAnswers, sortField));
+      });
   };
 
-  // Инициализация ответов для текущего теста
-  useEffect(() => {
-    if (test) {
-      const relatedAnswers = atveti.filter((answer) => answer["id-test"] === test.id);
-      setVisibleAnswers(relatedAnswers);
-    }
-  }, [test]);
 
   if (!test) {
     return <p>Тест не найден</p>;
   }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const back = useNavigate('');
-
   const handleBackButtonClick = () => {
-    back("/");
+    navigate("/");
   };
+  
 
   return (
     <div className="test-item">
@@ -95,7 +144,7 @@ export const TestItem = () => {
         <div className="buttons">
           <button type='button' className='goHome' onClick={handleBackButtonClick}>НАЗАД</button>
           <button type='button' className='goEdit' >РЕДАГУВАТИ</button>
-          <button type='button' className='goDelete'>ВИДАЛИТИ</button>
+          <button type='button' className='goDelete' onClick={handleDeleteTest}>ВИДАЛИТИ</button>
         </div>
         <p>Номер роботи: {test.nomer}</p>
         <p>Назва роботи: {test.nazwa}</p>

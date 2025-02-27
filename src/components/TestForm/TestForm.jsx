@@ -8,6 +8,7 @@ import { MATRIX } from "./TYPES-BLOCK/MATRIX";
 import { VARIANT_Q } from "./TYPES-BLOCK/VARIANT-Q";
 import { LIST_PARS } from "./TYPES-BLOCK/LIST-PARS";
 import { LIST_REBR_Q } from "./TYPES-BLOCK/LIST-REBR-Q";
+import {BAZISSILIK} from "../../../var"
 
 export const TestForm = () => {
   const { testId } = useParams();
@@ -34,7 +35,7 @@ export const TestForm = () => {
 
   // Загрузка теста
   useEffect(() => {
-    fetch(`http://localhost:3001/tests/${testId}`)
+    fetch(BAZISSILIK.api+"api/tests/"+testId)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Тест не найден");
@@ -57,7 +58,7 @@ export const TestForm = () => {
   
     // Проверяем, что все ответы заполнены
     if (Object.keys(formData.answers).length !== test.questions.length) {
-      alert("Пожалуйста, ответьте на все вопросы.");
+      alert("Дайте відповідь на всі запитання.");
       return;
     }
   
@@ -77,7 +78,7 @@ export const TestForm = () => {
     setIsSubmitting(true); // Показываем индикатор загрузки
   
     // Отправляем запрос на сервер
-    fetch("http://localhost:3001/submit", {
+    fetch(BAZISSILIK.api+"submit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -17,7 +17,7 @@ export const LIST_PARS = ({ onChange }) => {
         consistencyImportant: isOrderImportant, // Важность порядка
       },
     });
-  }, [pairs, isOrderImportant]);
+  }, [pairs, isOrderImportant, onChange]);
 
   const addPair = () => {
     setPairs([...pairs, { id: pairs.length + 1, first: "", second: "" }]);

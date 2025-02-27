@@ -1,8 +1,7 @@
  
-import { useState } from "react"; 
+import { useState, useEffect } from 'react';
 import ch from "classnames";
 import "./Main.scss";
-import roboti from "../../../../TESTS.json";
 import { Robota } from "./Robota/Robota";
 
 const SORT_FIELD_NUMBER = "nomer";
@@ -10,9 +9,20 @@ const SORT_FIELD_NAME = "nazwa";
 const SORT_FIELD_PROGRESS = "progress";
 
 export const Main = () => {
+  const [roboti, setRoboti] = useState([]);
   const [visibleRobots, setVisibleRobots] = useState(roboti);
   const [sortField, setSortField] = useState('');
   const [query, setQuery] = useState('');
+
+  useEffect(() => {
+    fetch("https://stradanie-production.up.railway.app/api/tests")
+      .then((res) => res.json())
+      .then((data) => {
+        setRoboti(data);  // Сохраняем загруженные данные в roboti
+        setVisibleRobots(data); // Используем те же данные для отображения
+      })
+      .catch((error) => console.error("Ошибка загрузки тестов:", error));
+  }, []);
 
   const reset = () => {
     setVisibleRobots(roboti);
