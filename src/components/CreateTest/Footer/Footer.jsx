@@ -2,13 +2,14 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 const API_URL = 'https://stradanie-production.up.railway.app/api/tests';
+import {BAZISSILIK} from '../../../../var'
 // eslint-disable-next-line react/prop-types
 export const Footer = ({ addQuestion, totalPoints, testName, testNumber, additionalText, questions }) => {
   const [testLink, setTestLink] = useState(''); // Хранение ссылки на тест
   const [data, setData] = useState([]);
 
   const navigate = useNavigate();
-  const uniqueLink = `http://localhost:5173/test/${Date.now()}`; // Уникальная ссылка
+  const uniqueLink = BAZISSILIK.poka+`test/${Date.now()}`; // Уникальная ссылка
 
   const test = {
     nazwa: testName, // Название работы

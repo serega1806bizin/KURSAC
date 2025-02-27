@@ -6,7 +6,7 @@ import { VARIANT_Q } from "./TYPES-BLOCK/VARIANT-Q";
 import { MATRIX } from "./TYPES-BLOCK/MATRIX";
 import { LIST_PARS } from "./TYPES-BLOCK/LIST-PARS";
 import { LIST_REBR_Q } from "./TYPES-BLOCK/LIST-REBR-Q";
-import { LIST_NUMBER } from "./TYPES-BLOCK/LIST-NUMBER.JSX";
+import { LIST_NUMBER } from "./TYPES-BLOCK/LIST-NUMBER";
 
 // eslint-disable-next-line react/prop-types, no-unused-vars
 export const QESTION = ({ id, onDelete, onPointsChange, onUpdate }) => {
